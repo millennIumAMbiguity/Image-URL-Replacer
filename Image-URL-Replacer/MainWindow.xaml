@@ -1,0 +1,64 @@
+﻿<Window x:Class="ImageUrlReplacer.MainWindow" x:Name="Form" Drop="MainWindow_OnDrop" AllowDrop="True"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageUrlReplacer"
+        mc:Ignorable="d"
+        Title="Image URL Replacer" Height="350" Width="525">
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" CanExecute="CommonCommandBinding_CanExecute" Executed="CommandOpen_Executed"/>
+        <CommandBinding Command="Save" CanExecute="CommandSave_CanExecute" Executed="CommandSave_Executed" />
+        <CommandBinding Command="SaveAs" CanExecute="CommandSave_CanExecute" Executed="CommandSaveAs_Executed"/>
+        
+        <CommandBinding Command="Undo" CanExecute="CommandUndo_CanExecute" Executed="CommandUndo_Executed" />
+        <CommandBinding Command="Redo" CanExecute="CommandRedo_CanExecute" Executed="CommandRedo_Executed"/>
+        
+        <CommandBinding Command="Copy" CanExecute="CommandCopy_CanExecute" Executed="CommandCopy_OnExecuted" />
+        <CommandBinding Command="Paste" CanExecute="CommonCommandBinding_CanExecute" Executed="CommandPaste_OnExecuted" />
+        <CommandBinding Command="Cut" CanExecute="CommandCopy_CanExecute" Executed="CommandCut_OnExecuted"/>
+        
+        <CommandBinding Command="ScrollPageUp" CanExecute="CommandSave_CanExecute" Executed="CommandNext_Executed"/>
+        <CommandBinding Command="ScrollPageDown" CanExecute="CommandSave_CanExecute" Executed="CommandPrevious_Executed"/>
+        <CommandBinding Command="NextPage" CanExecute="CommandSave_CanExecute" Executed="CommandNext_Executed"/>
+        <CommandBinding Command="PreviousPage" CanExecute="CommandSave_CanExecute" Executed="CommandPrevious_Executed"/>
+        
+        <CommandBinding Command="CancelPrint" CanExecute="CommandSave_CanExecute" Executed="CommandPrevious_Executed"/>
+        
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="SaveAs" Modifiers="Control + Shift" Key="S" Gesture="Shift+Ctrl+S"/>
+        <KeyBinding Command="CancelPrint" Key="Escape" Gesture="Esc"/>
+    </Window.InputBindings>
+    <Grid>
+        <DockPanel>
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar ToolBarTray.IsLocked="True">
+                    <Menu ToolBar.OverflowMode="Never">
+                        <MenuItem Header="File">
+                            <MenuItem Command="Open" Header="Open"/>
+                            <MenuItem Command="Save" Header="Save"/>
+                            <MenuItem Command="SaveAs" Header="Save As"/>
+                        </MenuItem>
+                        <MenuItem Header="Url">
+                            <MenuItem Command="Copy" Header="Copy"/>
+                            <MenuItem Command="Paste" Header="Paste"/>
+                            <MenuItem Command="Cut" Header="Cut"/>
+                        </MenuItem>
+                    </Menu>
+                    <Button Command="Undo" Content="Undo"></Button>
+                    <Button Command="Redo" Content="Redo"></Button>
+                </ToolBar>
+            </ToolBarTray>
+            <Grid>
+                <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="4px">
+                    <TextBox x:Name="TextField" Text="" Margin="0,0,108px,0"></TextBox>
+                    <Button Command="ScrollPageUp" HorizontalAlignment="Right" Height="20px" Width="50px">Next</Button>
+                    <Button Command="ScrollPageDown" HorizontalAlignment="Right" Height="20px" Width="50px" Margin="0,0,54px,0">Previous</Button>
+                </Grid>
+                <Image x:Name="Image" Source="" Margin="0, 32px,0,0"></Image>
+            </Grid>
+        </DockPanel>
+        
+    </Grid>
+</Window>
